@@ -1,0 +1,100 @@
+CREATE DATABASE CBX;
+
+USE CBX;
+
+-- This table is used for storing Login Details Only  
+CREATE TABLE Authentication (
+  username VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL PRIMARY KEY,
+  password VARCHAR(255) NOT NULL
+);
+
+
+
+USE CBX;
+
+-- This Table is used for storing multiple details of User  
+CREATE TABLE Credentials (
+  email VARCHAR(100) PRIMARY KEY,
+  phone VARCHAR(20),
+  address VARCHAR(255),
+  country VARCHAR(100),
+  dob DATE,
+  age INT,
+  profilePic LONGTEXT,
+  FOREIGN KEY (email) REFERENCES Authentication(email) ON DELETE CASCADE
+);
+
+
+
+
+-- User asset holdings
+CREATE TABLE Assets (
+    email VARCHAR(100),
+    coin VARCHAR(20),
+    quantity DOUBLE,
+    FOREIGN KEY (email) REFERENCES Authentication(email)
+);
+
+ 
+-- Transaction history 
+CREATE TABLE Transactions (
+    email VARCHAR(100),
+    coin VARCHAR(20),
+    type ENUM('buy', 'sell'),
+    quantity DOUBLE,
+    price_per_unit DOUBLE,
+    fee DOUBLE,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (email) REFERENCES Authentication(email)
+);
+
+
+
+
+-- Deposit Records
+CREATE TABLE Deposit (
+    txid INT AUTO_INCREMENT PRIMARY KEY,   -- Unique transaction ID (1 to N)
+    sndr VARCHAR(100),                     -- Sender address
+    rcvr VARCHAR(100),                     -- Receiver address
+    chn VARCHAR(20),                       -- Blockchain chain (e.g., ETH, BSC)
+    coin VARCHAR(10),                      -- Coin name or symbol
+    qty DOUBLE                             -- Quantity deposited
+);
+
+
+ALTER TABLE Deposit
+ADD COLUMN email VARCHAR(100);
+
+
+
+
+
+
+-- Withdrawal Records
+CREATE TABLE Withdrawal (
+    txid INT AUTO_INCREMENT PRIMARY KEY,   -- Unique transaction ID (1 to N)
+    sndr VARCHAR(100),                     -- Sender address
+    rcvr VARCHAR(100),                     -- Receiver address
+    chn VARCHAR(20),                       -- Blockchain chain (e.g., ETH, BSC)
+    coin VARCHAR(10),                      -- Coin name or symbol
+    qty DOUBLE                             -- Quantity deposited
+);
+
+
+
+CREATE TABLE LockedAssets (
+    email VARCHAR(100),
+    coin VARCHAR(50),
+    quantity DOUBLE,
+    lock_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (email, coin)
+);
+
+
+ALTER TABLE Assets MODIFY quantity DECIMAL(38,18);
+ALTER TABLE LockedAssets MODIFY quantity DECIMAL(38,18);
+
+
+ALTER TABLE LockedAssets ADD COLUMN lock_timestamp BIGINT DEFAULT 0;
+

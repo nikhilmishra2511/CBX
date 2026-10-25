@@ -1,0 +1,215 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #0a0a0a;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh; /* real visible height on mobile browsers */
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+#greeting {
+  font-size: 1.4rem;
+  color: #00ffc8;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.nav-buttons button {
+  background: none;
+  border: 2px solid #00ffc8;
+  color: #00ffc8;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.nav-buttons button:hover {
+  background: #00ffc8;
+  color: #0a0a0a;
+  transform: scaleY(1.2);
+}
+
+.search-bar {
+  position: relative;
+  padding: 10px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 5px;
+}
+
+.search-bar .input-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.search-bar input {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  flex: 1;          /* fills available width instead of fixed 1760px */
+  min-width: 0;
+}
+
+.search-bar button {
+  padding: 8px 12px;
+  border-radius: 5px;
+  background: #00ffc8;
+  border: none;
+  color: #0a0a0a;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.search-bar button:hover {
+  transform: scaleY(1.2);
+}
+
+.suggestion-box {
+  position: absolute;
+  top: 60px; /* Pushes it below input+button */
+  left: 24px;
+  background: #121212;
+  color: #fff;
+  border: 1px solid #00ffc8;
+  border-radius: 5px;
+  width: 500px;
+  max-width: calc(100% - 48px);
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 999;
+  display: none;
+}
+
+.suggestion-box div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion-box div:hover {
+  background-color: #00ffc8;
+  color: #0a0a0a;
+}
+
+
+
+.coin-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columns */
+  gap: 20px;
+  padding: 20px 24px;
+  align-content: start;
+  flex: 1 1 auto;   /* grid takes all leftover space, pushing footer to the bottom */
+}
+
+@media (max-width: 1200px) {
+  .coin-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 900px) {
+  .coin-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .coin-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 12px; }
+}
+@media (max-width: 380px) {
+  .coin-grid { grid-template-columns: 1fr; }
+}
+
+
+.coin-card {
+  background: #121212;
+  border: 1px solid #222;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.coin-card:hover {
+  transform: translateY(-5px);
+}
+
+.coin-card button {
+  margin: 5px 5px 0 5px;
+  padding: 6px 12px;
+  font-weight: bold;
+  background-color: transparent;
+  border: 2px solid #00ffc8;
+  color: #00ffc8;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.coin-card button:hover {
+  background-color: #00ffc8;
+  color: #0a0a0a;
+  transform: scale(1.05);
+}
+.coin-card img {
+  width: 40px;
+  height: 40px;
+}
+
+.coin-name {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.coin-price {
+  margin-top: 6px;
+  color: #00ffc8;
+  font-size: 0.95rem;
+}
+
+
+
+.footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  background-color: #111;
+  color: #ccc;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 15px 0;
+  border-top: 1px solid #222;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+@media (max-width: 600px) {
+  .footer-content {
+    font-size: 0.8rem;
+  }
+}

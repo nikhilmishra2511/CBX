@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>CBX</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* Background Video */
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 20px;
+      position: relative;
+    }
+
+    header img {
+      margin-top: -80px;
+      width: 350px;
+      height: auto;
+      animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Login/Signup Button Styles */
+    .cta-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 10;
+    }
+
+    .cta-btn button {
+      padding: 10px 28px;
+      font-size: 1rem;
+      color: #fff;
+      background: transparent;
+      border: 2px solid #f5d37d;
+      border-radius: 30px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(3px);
+      box-shadow: 0 0 6px rgba(245, 211, 125, 0.25);
+    }
+
+    .cta-btn button:hover {
+      background: rgba(245, 211, 125, 0.15);
+      color: #fff;
+      box-shadow:
+        0 0 8px rgba(245, 211, 125, 0.2),
+        0 0 25px rgba(245, 211, 125, 0.15),
+        inset 0 0 5px rgba(255, 255, 255, 0.1);
+      transform: scale(1.04);
+    }
+
+    .intro {
+      text-align: center;
+      font-size: 2rem;
+      margin-top: 20px;
+      min-height: 60px;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 50px 20px;
+      gap: 30px;
+    }
+
+    .feature {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 300px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .feature h3 {
+      color: #00ffc8;
+    }
+
+    @media (max-width: 768px) {
+      .intro {
+        font-size: 1.5rem;
+      }
+
+      .feature {
+        max-width: 90%;
+      }
+
+      .cta-btn {
+        flex-direction: column;
+        top: 10px;
+        right: 10px;
+        gap: 10px;
+      }
+
+      .cta-btn button {
+        width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Video -->
+  <video autoplay muted loop id="bgVideo">
+    <source src="intro.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- Header Content -->
+  <header>
+
+    <!-- Login/Signup Buttons (top-right) -->
+    <div class="cta-btn">
+      <button onclick="location.href='Authentication/Login.html'">Login</button>
+      <button onclick="location.href='Authentication/Signup.html'">Signup</button>
+    </div>
+
+    <!-- Centered Logo -->
+    <img src="logo.png" alt="Chill Bears Exchange Logo" />
+
+    <!-- Typewriter Text -->
+    <div class="intro" id="introText"></div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="feature">
+      <h3>Secure Transactions</h3>
+      <p>Our exchange uses the latest encryption standards to ensure safety and privacy of all trades.</p>
+    </div>
+    <div class="feature">
+      <h3>Real-Time Data</h3>
+      <p>Track over 100+ cryptocurrencies with live prices via Binance WebSocket integration.</p>
+    </div>
+    <div class="feature">
+      <h3>User Friendly</h3>
+      <p>Chill UI built for ease of use, whether you’re a beginner or a pro trader.</p>
+    </div>
+    <div class="feature">
+      <h3>Fast Transactions</h3>
+      <p>Execute buy/sell orders in milliseconds with our lightning-fast engine.</p>
+    </div>
+    <div class="feature">
+      <h3>24/7 Support</h3>
+      <p>Our friendly support bears are always online to help you resolve issues quickly.</p>
+    </div>
+    <div class="feature">
+      <h3>Multi-Currency Wallet</h3>
+      <p>Store, manage, and swap a variety of cryptocurrencies in one secure wallet built into the exchange.</p>
+    </div>
+    <div class="feature">
+      <h3>Advanced Analytics</h3>
+      <p>Make smart trading decisions with our built-in charting tools, market indicators, and real-time stats.</p>
+    </div>
+    <div class="feature">
+      <h3>Low Trading Fees</h3>
+      <p>Enjoy competitive fees with zero hidden charges — more value for every transaction.</p>
+    </div>
+  </section>
+
+  <!-- Typewriter Script -->
+  <script>
+    const text = "Welcome to Chill Bears Exchange — Trade Smart, Stay Chill 🐻‍❄️";
+    let index = 0;
+    const speed = 70;
+    const intro = document.getElementById("introText");
+
+    function typeWriter() {
+      if (index < text.length) {
+        intro.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    window.onload = typeWriter;
+
+     // Prevent back button after logout
+  history.pushState(null, null, location.href);
+  window.onpopstate = function () {
+    history.go(1);
+  };
+  </script>
+
+</body>
+</html>

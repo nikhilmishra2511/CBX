@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBX Dashboard</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div class="topbar">
+    <div id="greeting">👋 Hello!</div>
+    <div class="nav-buttons">
+     <button onclick="location.href='profile/profile.html'">Profile</button>
+<button onclick="location.href='earn/earn.html'">Earn</button>
+<button onclick="location.href='asset/asset.html'">Asset</button>
+<button onclick="location.href='support/support.html'">Customer Service</button>
+    </div>
+  </div>
+
+<div class="search-bar">
+  <div class="input-button-wrapper">
+    <input type="text" id="searchInput" placeholder="Search Crypto..." oninput="suggestCoins()">
+    <button onclick="searchCoin()">Search</button>
+  </div>
+  <div id="suggestions" class="suggestion-box"></div>
+</div>
+
+
+
+  <div class="coin-grid" id="coinGrid">
+    <!-- Crypto cards dynamically inserted here -->
+  </div>
+
+
+
+  <footer class="footer">
+  <div class="footer-content">
+    <span>© 2025 CBX Exchange. All rights reserved.</span>
+    <span>Made with ❤️ for Crypto Enthusiasts</span>
+  </div>
+</footer>
+
+
+  <script src="main.js"></script>
+</body>
+</html>

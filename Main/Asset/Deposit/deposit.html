@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deposit</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #c9d1d9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      background-color: #161b22;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 255, 150, 0.3), 0 6px 10px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+      position: relative;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 0.5rem;
+      border: 1px solid #30363d;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #58a6ff;
+    }
+
+    ul.suggestions {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 150px;
+      overflow-y: auto;
+      background-color: #21262d;
+      border-radius: 0.5rem;
+      border: 1px solid #30363d;
+      position: absolute;
+      width: 100%;
+      top: calc(100% + 5px);
+      z-index: 5;
+    }
+
+    ul.suggestions li {
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    ul.suggestions li:hover {
+      background-color: #30363d;
+    }
+
+    .suggest-box {
+      position: relative;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #238636;
+      border: none;
+      color: white;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #2ea043;
+    }
+
+    .disclaimer {
+      color: #f85149;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 1rem;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <h2>Deposit Crypto</h2>
+      <label for="coinSearch">Select Coin</label>
+      <div class="suggest-box">
+        <input type="text" id="coinSearch" autocomplete="off" placeholder="Search coin name..." />
+        <ul id="suggestions" class="suggestions"></ul>
+      </div>
+
+      <label for="address">Receiver Address</label>
+      <input type="text" id="address" value="" disabled />
+
+      <label for="qty">Quantity</label>
+      <input type="number" id="qty" min="0" placeholder="Enter quantity" />
+
+      <label for="sender">Sender Address</label>
+      <input type="text" id="sender" placeholder="Enter your sending address" />
+
+      <button onclick="submitDeposit()">Submit Deposit</button>
+    </div>
+
+    <p class="disclaimer">
+      ⚠️ If the deposited amount is not reflected in your account within 24 hours, the administration reserves the right to reverse the transaction and reclaim the funds from your wallet.
+    </p>
+  </div>
+
+  <script src="coinlist.js"></script>
+  <script>
+    const coinSearch = document.getElementById('coinSearch');
+    const suggestions = document.getElementById('suggestions');
+    const addressField = document.getElementById('address');
+
+    const receiverAddress = '0x6b61be59d1c0b309c6196e0cccd0669f06d0b1fb'; // BSC only
+
+    window.addEventListener('DOMContentLoaded', () => {
+      addressField.value = receiverAddress;
+    });
+
+    function filterSuggestions(input) {
+      const search = input.toLowerCase();
+      suggestions.innerHTML = '';
+      if (!search) return;
+      const matchedCoins = coinNames.filter(coin => coin.toLowerCase().startsWith(search));
+      if (matchedCoins.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = 'No match found';
+        li.style.color = 'gray';
+        suggestions.appendChild(li);
+        return;
+      }
+      matchedCoins.forEach(coin => {
+        const li = document.createElement('li');
+        li.textContent = coin;
+        li.onclick = () => {
+          coinSearch.value = coin;
+          suggestions.innerHTML = '';
+        };
+        suggestions.appendChild(li);
+      });
+    }
+
+    coinSearch.addEventListener('input', (e) => {
+      filterSuggestions(e.target.value);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!coinSearch.contains(e.target) && !suggestions.contains(e.target)) {
+        suggestions.innerHTML = '';
+      }
+    });
+
+    function submitDeposit() {
+      const coin = coinSearch.value.trim();
+      const rcvr = addressField.value;
+      const qty = parseFloat(document.getElementById('qty').value);
+      const sndr = document.getElementById('sender').value.trim();
+      const email = localStorage.getItem("userEmail");
+
+      if (!coinNames.includes(coin)) {
+        alert('Please select a valid coin from suggestions.');
+        return;
+      }
+      if (isNaN(qty) || qty <= 0) {
+        alert('Please enter a valid quantity.');
+        return;
+      }
+      if (!sndr) {
+        alert('Sender address is required.');
+        return;
+      }
+      if (!email) {
+        alert('User email not found. Please login again.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('coin', coin);
+      formData.append('chn', 'BSC');
+      formData.append('rcvr', rcvr);
+      formData.append('qty', qty);
+      formData.append('sndr', sndr);
+
+      fetch('deposit.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        alert(data);
+        window.history.back();
+      })
+      .catch(error => {
+        alert('Error: ' + error);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earn Crypto – 5% APY</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #0e1117;
+      color: #e4e6eb;
+      overflow: hidden;
+    }
+
+    header {
+      background-color: #1a1d24;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #2e323c;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+    }
+
+    nav a {
+      color: #aaa;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: linear-gradient(to bottom, #15181f 20%, #0e1117 100%);
+      animation: fadeSlide 1s ease-out;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #ccc;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 3rem 2rem;
+    }
+.lock-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 1.5rem 2rem 0rem 2rem;  /* Shift upward */
+  gap: 1.2rem;
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+.lock-box {
+  flex: 1 1 31.5%;
+  min-width: 320px;
+  background-color: #0e1117;
+  border: 1px solid #2d303a;
+  border-radius: 1rem;
+  padding: 1.2rem;
+  height: 290px;
+  box-sizing: border-box;
+  overflow-y: hidden;
+}
+
+.lock-box h3 {
+  margin-bottom: 0.8rem;
+  color: #fff;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.lock-box form label {
+  margin-top: 0.5rem;
+  display: block;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.lock-box select,
+.lock-box input,
+.lock-box button {
+  margin-top: 0.4rem;
+  width: 100%;
+  padding: 9px;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  border: none;
+}
+
+.lock-box select,
+.lock-box input {
+  background-color: #1f2937;
+  color: #fff;
+}
+
+.lock-box button {
+  background-color: #10b981; /* Teal Green */
+  color: #ffffff;
+  margin-top: 0.8rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.lock-box button:hover {
+  background-color: #0e9e6e; /* Slightly darker teal */
+  transform: translateY(-2px); /* Slight lift on hover */
+  color: #ffffff;
+}
+
+
+.lock-box table {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.lock-box th,
+.lock-box td {
+  border: 1px solid #374151;
+  padding: 5px;
+  text-align: center;
+}
+
+.lock-box th {
+  background-color: #1f2937;
+  color: #fff;
+}
+
+ 
+
+    select, input, button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 0.5rem;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    select, input {
+      background-color: #1f2937;
+      color: #fff;
+    }
+
+    button {
+      background-color: #10b981;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #059669;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #374151;
+      text-align: center;
+    }
+
+    th {
+      background-color: #1f2937;
+    }
+
+    .sub-box {
+      margin-top: 2rem;
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: #1b1f27;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #2d303a;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      color: #f0f0f0;
+    }
+
+    .card p {
+      color: #aaa;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid #2e323c;
+      color: #777;
+      font-size: 0.85rem;
+    }
+
+    @keyframes fadeSlide {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CBX Earn</h1>
+    <nav>
+     <a href="../main.html">Dashboard</a>
+     <a href="../Asset/asset.html">Assets</a>
+     <a onclick="logout()">Logout</a>
+     <a href="../support/support.html">Customer Support</a>
+
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Earn 5% APY by Locking Crypto</h2>
+    <p>Grow your holdings safely. Lock your crypto assets for fixed periods and earn stable returns. No trading. No risks. Just passive income.</p>
+  </section>
+
+   
+ <!-- 🔒 Lock System: 3 Wide Short Boxes in a Row -->
+<div class="lock-row">
+  <!-- Box 1: Lock Assets -->
+  <div class="lock-box">
+    <h3>🔒 Lock Assets</h3>
+    <form method="POST" action="lock_asset.php">
+      <input type="hidden" id="email" name="email">
+
+      <label for="coin">Select Coin</label>
+      <select name="coin" id="coinSelect"></select>
+
+      <label for="qty">Quantity to Lock</label>
+      <input type="number" name="qty" min="0.0001" step="any" required>
+
+      <button type="submit">Lock & Earn</button>
+    </form>
+  </div>
+
+  <!-- Box 2: Locked Assets -->
+  <div class="lock-box">
+    <h3>🧊 Locked Assets</h3>
+    <div id="lockedAssetsBox">Loading...</div>
+  </div>
+
+  <!-- Box 3: Live Earnings -->
+  <div class="lock-box">
+    <h3>⏱ Live Earnings</h3>
+    <div id="earningList">Loading...</div>
+  </div>
+</div>
+
+
+
+  <!-- 📈 Benefits Moved to Bottom -->
+  <section class="section">
+    <h2>📈 Benefits</h2>
+    <div class="benefits">
+      <div class="card">
+        <h3>Secure</h3>
+        <p>Your funds are stored with maximum security protocols and transparency.</p>
+      </div>
+      <div class="card">
+        <h3>Guaranteed Returns</h3>
+        <p>Enjoy 5% annual returns, credited monthly on your locked crypto assets.</p>
+      </div>
+      <div class="card">
+        <h3>Withdraw Anytime</h3>
+        <p>You can unlock your funds whenever you want — no fixed terms required.</p>
+      </div>
+      <div class="card">
+        <h3>All Coins Supported</h3>
+        <p>Lock and earn with BTC, ETH, BNB, SOL, USDT, and more — no limitations.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 CBX Exchange. All rights reserved.
+  </footer>
+
+  <script>
+    const email = localStorage.getItem("userEmail");
+    document.getElementById("email").value = email;
+
+    const APY = 0.05;
+    const SECONDS_IN_YEAR = 365 * 24 * 60 * 60;
+    const RATE_PER_SEC = APY / SECONDS_IN_YEAR;
+
+    function loadAssetsAndLocked() {
+      fetch(`earn_assets.php?email=${email}`)
+        .then(res => res.json())
+        .then(data => {
+          const coinSelect = document.getElementById("coinSelect");
+          coinSelect.innerHTML = '';
+
+          if (data.assets.length === 0) {
+            const option = document.createElement("option");
+            option.text = "No assets available to lock";
+            coinSelect.appendChild(option);
+          } else {
+            data.assets.forEach(a => {
+              const opt = document.createElement("option");
+              opt.value = a.coin;
+              opt.text = `${a.coin} (Available: ${a.quantity})`;
+              coinSelect.appendChild(opt);
+            });
+          }
+
+          const box = document.getElementById("lockedAssetsBox");
+          if (data.locked.length === 0) {
+            box.innerHTML = "<p>No assets currently locked.</p>";
+          } else {
+            let html = `<table>
+              <tr><th>Coin</th><th>Qty</th><th>Locked Since</th><th>Action</th></tr>`;
+            data.locked.forEach(a => {
+              html += `
+                <tr>
+                  <td>${a.coin}</td>
+                  <td>${a.quantity}</td>
+                  <td>${a.lock_time}</td>
+                  <td>
+                    <form method="POST" action="unlock_asset.php" onsubmit="return confirm('Unlock this asset?')">
+                      <input type="hidden" name="email" value="${email}">
+                      <input type="hidden" name="coin" value="${a.coin}">
+                      <button type="submit">Unlock</button>
+                    </form>
+                  </td>
+                </tr>`;
+            });
+            html += "</table>";
+            box.innerHTML = html;
+          }
+        });
+    }
+
+    function startLiveEarnings() {
+      fetch(`earn_locked_with_time.php?email=${email}`)
+        .then(res => res.json())
+        .then(data => {
+          const box = document.getElementById("earningList");
+          box.innerHTML = '';
+
+          data.forEach(asset => {
+            const div = document.createElement("div");
+            const coinId = `earn_${asset.coin.replaceAll(' ', '_')}`;
+
+            div.innerHTML = `
+              <strong>${asset.coin}</strong> → Locked: ${asset.quantity}
+              <br>📈 <span id="${coinId}">Calculating...</span> earned so far
+              <br><br>
+            `;
+            box.appendChild(div);
+
+            const startTime = new Date(asset.lock_time_iso).getTime();
+            const base = parseFloat(asset.quantity);
+            if (isNaN(base) || base <= 0) {
+              document.getElementById(coinId).innerText = "0.000000000000000000";
+              return;
+            }
+
+            function update() {
+              const secondsPassed = (Date.now() - startTime) / 1000;
+              const earned = base * RATE_PER_SEC * secondsPassed;
+              document.getElementById(coinId).innerText = earned.toFixed(18);
+              requestAnimationFrame(update);
+            }
+
+            update();
+          });
+        });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadAssetsAndLocked();
+      startLiveEarnings();
+    });
+
+     function logout() {
+    localStorage.clear();
+    window.location.replace("../../intro.html"); // Better than href for logout
+  }
+  </script>
+</body>
+</html>

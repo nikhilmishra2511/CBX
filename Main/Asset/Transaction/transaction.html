@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Transaction History</title>
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #00ffc8;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #111;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #333;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    th {
+      background-color: #222;
+      color: #00ffc8;
+    }
+
+    tr:hover {
+      background-color: #1e1e1e;
+    }
+
+    #error {
+      color: #f66;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Your Transaction History</h2>
+  <table id="txTable">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Coin</th>
+        <th>Quantity</th>
+        <th>Price (USDT)</th>
+        <th>Fee</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <p id="error"></p>
+
+  <script>
+    const email = localStorage.getItem("userEmail");
+    if (!email) {
+      document.getElementById("error").textContent = "User not logged in.";
+      throw new Error("No email in localStorage.");
+    }
+
+    fetch("transaction.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email })
+    })
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector("#txTable tbody");
+
+      if (!Array.isArray(data)) {
+        document.getElementById("error").textContent = "No transactions found.";
+        return;
+      }
+
+      data.forEach(tx => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${tx.type}</td>
+          <td>${tx.coin.toUpperCase()}</td>
+          <td>${parseFloat(tx.quantity).toFixed(6)}</td>
+          <td>$${parseFloat(tx.price_per_unit).toFixed(2)}</td>
+          <td>${parseFloat(tx.fee).toFixed(6)}</td>
+          <td>${tx.timestamp}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    })
+    .catch(err => {
+      console.error("Error loading transactions:", err);
+      document.getElementById("error").textContent = "Failed to load transactions.";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+   background-color: #1e3c72; /* Matches video theme */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: white;
+}
+
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.6);
+}
+
+
+.signup-container {
+  width: 400px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.8s forwards ease-out;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.signup-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.signup-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.signup-container input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #f1f1f1;
+  color: #000;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.signup-container button {
+  width: 50%;
+  display: block;
+  margin: 20px auto 10px auto;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #00ffc8;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    background-color: #00ffc8;
+  }
+  50% {
+    transform: scale(1.05);
+    background-color: #00e6b2;
+  }
+}
+
+.login-link {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.login-link a {
+  color: #00ffc8;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+  color: #00cc99;
+}
+
+#message {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #259aaf;
+}
